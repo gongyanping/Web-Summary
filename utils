@@ -1,2 +1,27 @@
 # 1.利用rem实现多分辨率兼容的问题
-  一般设计师会以一种比例设计去设计设计稿，如按照1920的分辨率去设计，一般设计稿的大小为1920/2=960。在兼容多个设备的时候，可以利用css3的新特性rem(相对于根元素<html>的字体大小)
+  一般设计师会以一种比例设计去设计设计稿，如按照1920的分辨率去设计，一般设计稿的大小为1920/2=960。在兼容多个设备的时候，可以利用css3的新特性rem(相对于根元素<html>的字体大小，去设计元素的大小)。
+  其中有一个问题，用vue开发的时候，大家喜欢用element-ui框架，但是element-ui框架所用的单位是px。这就会导致在1920和1366等不同分辨率的情况下，看到用ele组件搭建的框架的大小视觉上是不一样的，显然在1920上要小一些，在1366上面要大一些。这个时候可以用postcss-px2rem插件来解决这个问题，实现px转向为rem。
+参考：https://www.cnblogs.com/lml2017/p/9953429.html
+  使用方法：
+  1) npm install lib-flexible --save
+  2) npm install postcss-px2rem --save
+  3) 在main.js中引入import 'lib-flexible'
+  4) 配置postcss-px2rem 
+     ```
+     module.exports = {
+      css: {
+          loaderOptions: {
+            css: {},
+            postcss: {
+              plugins: [
+                require('postcss-px2rem')({
+                  remUnit: 75 //表示1rem代表75px
+                })
+              ]
+            }
+          }
+      }
+    }
+     ```
+  5) 重启项目
+最后在浏览器中就可以看到px变为rem了。
