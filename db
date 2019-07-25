@@ -1,0 +1,5 @@
+# 1.联表更新
+  UPDATE mps_placeinstitutions a
+  INNER JOIN mps_place b ON a.p_billid = b.p_billid
+  SET a.p_roman = b.p_roman
+  用一张表的对应数据更新本表数据
